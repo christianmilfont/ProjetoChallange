@@ -1,6 +1,14 @@
 # ProjetoChallange
 
-### 🛠️ Passo a passo
+## Vamos utilizar uma IceBox Backlog para ir atualizando nossas versões e regras de negócio.
+### Conforme fomos comitando o codigo, utiliza-se QA das feats
+
+
+
+
+
+
+### 🛠️ Passo a passo GitHub
 
 1. **📥 Clone o repositório**
 
