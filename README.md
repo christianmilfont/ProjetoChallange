@@ -1,6 +1,5 @@
 # ProjetoChallange
 
-# ProjetoChallange
 ### 🛠️ Passo a passo
 
 1. **📥 Clone o repositório**
