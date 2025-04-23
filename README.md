@@ -7,23 +7,23 @@
    Baseado na sua turma, faça o clone do repositório:
 
    ```sh
-   git clone https://github.com/2TDSPK-25/CP1.git
+   git clone https://github.com/....
    ```
 
 2. **📂 Navegue até o diretório do projeto**
 
    ```sh
-   cd CP1
+   cd exemplo
    ```
 
 3. **🌿 Crie uma nova branch**
 
    Crie uma nova branch com o seu RM (Registro de Matrícula):
 
-   **Exemplo para ao RM 12345:**
+   **Exemplo para ao exemplo:
 
    ```sh
-   git checkout -b RM12345
+   git checkout -b exemplo
    ```
 
 4. **🖥️ Abra a sua IDE e faça as alterações**
@@ -51,5 +51,5 @@
    Envie a sua branch para o repositório remoto:
 
    ```sh
-   git push origin RM12345
+   git push origin exemplo
    ```
