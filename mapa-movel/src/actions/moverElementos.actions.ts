@@ -2,7 +2,7 @@
   // api.js
 export const atualizarPosicao = async (id, novoX, novoY) => {
     try {
-      const response = await fetch('/api/mapa/atualizar', {
+      const response = await fetch('http://localhost:8080/api/atualizar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
