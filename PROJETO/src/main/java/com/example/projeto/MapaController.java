@@ -14,14 +14,19 @@ import com.example.projeto.model.Ponto;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/mapa")
+@RequestMapping("/api")
 public class MapaController {
 
     @PostMapping("/atualizar")
     public ResponseEntity<?> atualizarPosicao(@RequestBody Ponto ponto) {
-        // Aqui você poderia salvar a posição no banco de dados
-        System.out.println("Posição recebida: x=" + ponto.getX() + ", y=" + ponto.getY());
+        System.out.println("Posição recebida:");
+        System.out.println("Inicial -> x=" + ponto.getInicialX() + ", y=" + ponto.getInicialY());
+        System.out.println("Final   -> x=" + ponto.getFinalX() + ", y=" + ponto.getFinalY());
+    
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Posição salva com sucesso");
-        return ResponseEntity.ok(response);    }
+        return ResponseEntity.ok(response);
+    }
+    
+
 }

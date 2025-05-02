@@ -1,43 +1,40 @@
 package com.example.projeto.model;
 
 public class Ponto {
+    private int inicialX;
+    private int inicialY;
+    private int finalX;
+    private int finalY;
 
-    private int id;
-    private double x;
-    private double y;
-
-    // Construtores, getters e setters
-
-    public Ponto() {}
-
-    public Ponto(int id, double x, double y) {
-        this.id = id;
-        this.x = x;
-        this.y = y;
+    public int getInicialX() {
+        return inicialX;
     }
 
-    public int getId() {
-        return id;
+    public void setInicialX(int inicialX) {
+        this.inicialX = inicialX;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getInicialY() {
+        return inicialY;
     }
 
-    public double getX() {
-        return x;
+    public void setInicialY(int inicialY) {
+        this.inicialY = inicialY;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    public int getFinalX() {
+        return finalX;
     }
 
-    public double getY() {
-        return y;
+    public void setFinalX(int finalX) {
+        this.finalX = finalX;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    public int getFinalY() {
+        return finalY;
+    }
+
+    public void setFinalY(int finalY) {
+        this.finalY = finalY;
     }
 }
- 

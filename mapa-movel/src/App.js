@@ -1,92 +1,129 @@
 import React, { useState } from 'react';
 import './App.css';
-import { atualizarPosicao } from '../src/actions/moverElementos.actions.ts'; // Importa a função de ação
+import { atualizarPosicao } from '../src/actions/moverElementos.actions.ts';
 
 function App() {
-  // Estado para armazenar a posição e cor dos elementos
   const [elementos, setElementos] = useState([
-    { id: 1, x: 150, y: 100, cor: 'red' },
-    { id: 2, x: 300, y: 200, cor: 'blue' },
+    { id: 1, x: 0, y: 0, nome: 'Objeto 1' },
+    { id: 2, x: 0, y: 0, nome: 'Objeto 2' },
+    { id: 3, x: 0, y: 0, nome: 'Objeto 3' },
+    { id: 4, x: 0, y: 0, nome: 'Objeto 4' },
   ]);
 
-  // Função para mover um elemento
-  const moverElemento = async (id, novoX, novoY) => {
-    // Atualiza a posição localmente
-    setElementos((prevElementos) =>
-      prevElementos.map((elemento) =>
-        elemento.id === id ? { ...elemento, x: novoX, y: novoY } : elemento
-      )
-    );
+  const [isDragging, setIsDragging] = useState(false);
+  const [draggedElement, setDraggedElement] = useState(null);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [posicaoInicial, setPosicaoInicial] = useState({ x: 0, y: 0 });
 
-    try {
-      // Chama a função de ação para salvar a posição no backend
-      await atualizarPosicao(id, novoX, novoY);
-    } catch (error) {
-      console.error('Falha ao atualizar posição:', error);
-      alert('Houve um erro ao salvar a posição');
+  const onMouseDown = (e, elemento) => {
+    setIsDragging(true);
+    setDraggedElement(elemento);
+
+    const rect = e.target.getBoundingClientRect();
+    setOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+
+    // Salva a posição inicial ao clicar
+    setPosicaoInicial({ x: elemento.x, y: elemento.y });
+  };
+
+  const onMouseMove = (e) => {
+    if (isDragging && draggedElement) {
+      const newX = e.clientX - offset.x;
+      const newY = e.clientY - offset.y;
+
+      setElementos((prev) =>
+        prev.map((el) =>
+          el.id === draggedElement.id ? { ...el, x: newX, y: newY } : el
+        )
+      );
     }
   };
 
+  const onMouseUp = async () => {
+    setIsDragging(false);
+
+    if (draggedElement) {
+      const final = elementos.find((el) => el.id === draggedElement.id);
+
+      if (final) {
+        try {
+          await atualizarPosicao({
+            inicialX: posicaoInicial.x,
+            inicialY: posicaoInicial.y,
+            finalX: final.x,
+            finalY: final.y,
+          });
+          console.log('Movimento salvo com sucesso!');
+        } catch (error) {
+          console.error('Erro ao salvar no backend:', error);
+        }
+      }
+    }
+
+    setDraggedElement(null);
+  };
+
   return (
-    <div className="map-container">
-      <div className="map">
-        {elementos.map((elemento) => (
-          <Elemento
-            key={elemento.id}
-            id={elemento.id}
-            x={elemento.x}
-            y={elemento.y}
-            cor={elemento.cor}
-            moverElemento={moverElemento}
-          />
-        ))}
+    <div className="App" onMouseMove={onMouseMove} onMouseUp={onMouseUp}>
+      <div className="container">
+        {/* Mapa */}
+        <div className="map" style={{ width: '600px', height: '400px', border: '2px solid #000', position: 'relative' }}>
+          {elementos
+            .filter((el) => el.x !== 0 || el.y !== 0)
+            .map((elemento) => (
+              <div
+                key={elemento.id}
+                className="draggable"
+                style={{
+                  position: 'absolute',
+                  top: elemento.y,
+                  left: elemento.x,
+                  width: '80px',
+                  height: '30px',
+                  backgroundColor: 'blue',
+                  color: 'white',
+                  textAlign: 'center',
+                  lineHeight: '30px',
+                  cursor: 'move',
+                }}
+                onMouseDown={(e) => onMouseDown(e, elemento)}
+              >
+                {elemento.nome}
+              </div>
+            ))}
+        </div>
+
+        {/* Lista lateral */}
+        <div className="objects-list" style={{ marginLeft: '20px' }}>
+          {elementos.map((elemento) => (
+            <div
+              key={elemento.id}
+              className="object-item"
+              style={{ marginBottom: '10px', cursor: 'pointer' }}
+              onMouseDown={(e) => onMouseDown(e, elemento)}
+            >
+              <div
+                className="object"
+                style={{
+                  width: '80px',
+                  height: '30px',
+                  backgroundColor: 'green',
+                  color: 'white',
+                  textAlign: 'center',
+                  lineHeight: '30px',
+                }}
+              >
+                {elemento.nome}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
-
-const Elemento = ({ id, x, y, cor, moverElemento }) => {
-  const [isDragging, setIsDragging] = React.useState(false);
-  const [offsetX, setOffsetX] = React.useState(0);
-  const [offsetY, setOffsetY] = React.useState(0);
-
-  const onMouseDown = (e) => {
-    setIsDragging(true);
-    setOffsetX(e.clientX - e.target.getBoundingClientRect().left);
-    setOffsetY(e.clientY - e.target.getBoundingClientRect().top);
-  };
-
-  const onMouseMove = (e) => {
-    if (isDragging) {
-      const novoX = e.clientX - offsetX;
-      const novoY = e.clientY - offsetY;
-      moverElemento(id, novoX, novoY); // Chama a função passada como prop
-    }
-  };
-
-  const onMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  return (
-    <div
-      className="draggable"
-      style={{ top: y, left: x }}
-      onMouseDown={onMouseDown}
-    >
-      <div
-        className="draggable-inner"
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        style={{
-          width: '30px',
-          height: '30px',
-          backgroundColor: cor, // Usa a cor passada como propriedade
-          cursor: 'move',
-        }}
-      />
-    </div>
-  );
-};
 
 export default App;
