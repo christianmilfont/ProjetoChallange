@@ -1,32 +1,34 @@
 package com.example.projeto;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.projeto.model.Ponto;
+import com.example.projeto.model.PosicaoMoto;
+import com.example.projeto.service.ModeloOrganizacaoService;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class MapaController {
 
+    @Autowired
+    private ModeloOrganizacaoService modeloService;
+
     @PostMapping("/atualizar")
-    public ResponseEntity<?> atualizarPosicao(@RequestBody Ponto ponto) {
-        System.out.println("Posição recebida:");
-        System.out.println("Inicial -> x=" + ponto.getInicialX() + ", y=" + ponto.getInicialY());
-        System.out.println("Final   -> x=" + ponto.getFinalX() + ", y=" + ponto.getFinalY());
-    
+    public ResponseEntity<?> atualizarPosicoes(@RequestBody List<PosicaoMoto> motos) {
+        for (PosicaoMoto moto : motos) {
+            System.out.println(" -> X: " + moto.getInicialX() + " | Y: " + moto.getInicialY());
+        }
+
+        modeloService.criarModeloOrganizacao(motos);
+
         Map<String, Object> response = new HashMap<>();
-        response.put("mensagem", "Posição salva com sucesso");
+        response.put("mensagem", "Organização salva com sucesso");
         return ResponseEntity.ok(response);
     }
-    
-
 }

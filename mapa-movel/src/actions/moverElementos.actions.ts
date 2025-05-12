@@ -12,7 +12,7 @@ export const atualizarPosicao = async (posicao: PosicaoPayload) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(posicao),
+      body: JSON.stringify([posicao]), // Envia o objeto dentro de um array
     });
 
     if (!response.ok) {
@@ -27,3 +27,8 @@ export const atualizarPosicao = async (posicao: PosicaoPayload) => {
     throw error;
   }
 };
+
+
+
+
+
