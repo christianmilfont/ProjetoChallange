@@ -15,6 +15,8 @@ public class Moto {
     private String descricao;
     private boolean prontaParaUso;
     private boolean semPlaca;
+    private String chassi;
+    private String motor;
 
     public boolean isSemPlaca() {
         return semPlaca;
