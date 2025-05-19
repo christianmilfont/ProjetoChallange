@@ -10,7 +10,7 @@ Este é um projeto desenvolvido como parte de um desafio técnico. A aplicação
 
 ##  Tecnologias Utilizadas
 
-- ASP.NET Core 6
+- ASP.NET Core 8
 - Swagger (OpenAPI)
 - Entity Framework Core
 - C#
