@@ -1,0 +1,6 @@
+@MotoScript_Challange_HostAddress = http://localhost:5104
+
+GET {{MotoScript_Challange_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

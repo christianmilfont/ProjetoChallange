@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\bin",
+    "\\bin\\Debug",
+    "\\bin\\Release",
+    "\\Context",
+    "\\Controllers",
+    "\\Mappings",
+    "\\Model",
+    "\\obj",
+    "\\Properties"
+  ],
+  "SelectedNode": "\\Controllers\\MotosDefeituosasController.cs",
+  "PreviewInSolutionExplorer": false
+}
