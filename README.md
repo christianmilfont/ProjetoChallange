@@ -13,6 +13,7 @@ Este é um projeto desenvolvido como parte de um desafio técnico. A aplicação
 - ASP.NET Core 8
 - Swagger (OpenAPI)
 - Entity Framework Core
+- Oracle Entity Framework
 - C#
 - RESTful APIs
 
