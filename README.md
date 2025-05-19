@@ -3,6 +3,11 @@
 
 Este é um projeto desenvolvido como parte de um desafio técnico. A aplicação foi construída utilizando **.NET 6** e segue boas práticas de estrutura e organização para aplicações web.
 
+## Grupo:
+- Christian Milfont
+- Anderson Pedro
+- Iago Victor
+
 ##  Tecnologias Utilizadas
 
 - ASP.NET Core 6
