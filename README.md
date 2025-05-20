@@ -1,63 +1,60 @@
-# ProjetoChallange
+# ProjetoChallenge
+## Descrição
+#### O nosso Projeto Challenge é uma aplicação full-stack desenvolvida utilizando Java (Spring) no backend e React no frontend. O objetivo deste projeto é melhorar o quesito organizacional da Mottu, por meio de nosso sistema o qual permite controlar a criação de Motos e Motos Defeituosas. Além disso, permite salvar em um mapa (com grid para o objeto nao sair do quadrado posto) a posição da moto, verificação feita pelo Fiscal, e depois armazenar o "modelo" da ultima verificação (visando salvar a rotina de verificação de tal fiscal, para ter um meio de comprovação que ele fez essa verificação da moto que entrou no pátio e também para salvar a posiçao em que a moto ficou pela ultima vez!). 
 
-## Vamos utilizar uma IceBox Backlog para ir atualizando nossas versões e regras de negócio.
-### Conforme fomos comitando o codigo, utiliza-se QA das feats
+- Em breve, adicionarei na tela do Mapa, uma maneira de ele salvar a foto dessa organização em que o fical deixou a moto, mostrando exatamente area que ela ficou.
+- Na tela de Historico de verificação, adicionei em cada card as infomações do fiscal que fez essa verificação e tabem a foto do mapa
+
+  
+
+## Tecnologias
+### Backend:
+- Java com Spring Boot
+
+- Spring Data JPA para integração com banco de dados
+
+- Spring Security para autenticação e segurança
+
+### Frontend:
+- React para construção da interface de usuário
+
+- Axios para realizar chamadas HTTP para o backend
+
+- React Router para navegação entre as páginas
+
+### Banco de Dados
+- H2 em memória
 
 
 
 
 
+```
+bash
+Como Rodar o Projeto
+Backend (Spring Boot)
+Clone este repositório:
 
-### 🛠️ Passo a passo GitHub
 
-1. **📥 Clone o repositório**
+git clone https://github.com/christianmilfont/ProjetoChallange.git
+Navegue até o diretório do backend:
 
-   Baseado na sua turma, faça o clone do repositório:
 
-   ```sh
-   git clone https://github.com/....
-   ```
+cd ProjetoChallange/backend
+Execute o projeto com o comando Maven ou Gradle (dependendo de qual você usa):
 
-2. **📂 Navegue até o diretório do projeto**
+Usando Maven:
+mvn spring-boot:run
 
-   ```sh
-   cd exemplo
-   ```
 
-3. **🌿 Crie uma nova branch**
+O servidor backend estará disponível em http://localhost:8080.
 
-   Crie uma nova branch com o seu RM (Registro de Matrícula):
+Frontend (React)
+Navegue até o diretório do frontend:
 
-   **Exemplo para ao exemplo:
-
-   ```sh
-   git checkout -b exemplo
-   ```
-
-4. **🖥️ Abra a sua IDE e faça as alterações**
-
-   Abra o projeto na sua IDE preferida e desenvolva o seu código.
-
-5. **➕ Adicione as alterações**
-
-   Adicione todas as alterações que você fez ao staging:
-
-   ```sh
-   git add .
-   ```
-
-6. **📌 Comite as alterações**
-
-   Faça um commit das suas alterações com uma mensagem descritiva:
-
-   ```sh
-   git commit -m "Descrição das alterações"
-   ```
-
-7. **🚀 Envie a nova branch para o repositório remoto**
-
-   Envie a sua branch para o repositório remoto:
-
-   ```sh
-   git push origin exemplo
-   ```
+cd ProjetoChallange/frontend
+Instale as dependências:
+npm install
+Inicie o servidor de desenvolvimento:
+npm start
+O frontend estará disponível em http://localhost:3000.
