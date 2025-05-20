@@ -21,6 +21,8 @@
 - Axios para realizar chamadas HTTP para o backend
 
 - React Router para navegação entre as páginas
+  
+- Layout Responsivo com Grid
 
 ### Banco de Dados
 - H2 em memória
