@@ -1,0 +1,74 @@
+import { Button, Card, CardContent, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import buscarModelos from '../actions/buscarMotos.ts';
+
+const ModelosCard = () => {
+  const [modelos, setModelos] = useState([]);
+  const [carregando, setCarregando] = useState(false);
+  const [erro, setErro] = useState('');
+
+  const carregarModelos = async () => {
+    setCarregando(true);
+    setErro('');
+    try {
+      const resultado = await buscarModelos();
+      setModelos(resultado);
+    } catch (e) {
+      setErro('Erro ao buscar historico de verificação das motos');
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  useEffect(() => {
+    carregarModelos();
+  }, []);
+
+  return (
+    <div style={{ padding: '1rem' }}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={carregarModelos}
+        style={{ marginBottom: '1rem' }}
+      >
+        Atualizar Modelos
+      </Button>
+
+      {carregando && <Typography>Carregando...</Typography>}
+      {erro && <Typography color="error">{erro}</Typography>}
+
+      <Grid container spacing={2}>
+        {modelos.map((modelo, index) => (
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6">Histórico de Posições</Typography>
+                <Typography variant="h5" component="div">
+                  {modelo.name}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {modelo.descricao}
+                </Typography>
+                <Typography variant="subtitle2">Posições:</Typography>
+                {modelo.posicoes && modelo.posicoes.length > 0 ? (
+                  modelo.posicoes.map((posicao, i) => (
+                    <Typography key={i} variant="body2" color="text.secondary">
+                      De ({posicao.inicialX}, {posicao.inicialY}) para ({posicao.finalX}, {posicao.finalY})
+                    </Typography>
+                  ))
+                ) : (
+                  <Typography variant="body2" color="text.secondary">
+                    Nenhuma posição registrada.
+                  </Typography>
+                )}
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </div>
+  );
+};
+
+export default ModelosCard;
