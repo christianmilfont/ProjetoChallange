@@ -4,13 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Data
@@ -25,7 +24,7 @@ public class Moto {
 
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
-    
+
     @NotBlank(message = "A descrição é obrigatória")
     @Pattern(regexp = "^[A-Z].*", message = "Deve começar com letra maiúscula")
     private String descricao;
@@ -35,6 +34,4 @@ public class Moto {
     private String chassi;
     private String motor;
 
-    @ManyToOne
-    private HistoricooOrganizacao historico;
 }

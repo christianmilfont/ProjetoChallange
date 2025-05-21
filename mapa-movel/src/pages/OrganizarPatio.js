@@ -1,15 +1,40 @@
-import React, { useState } from 'react';
-import { atualizarPosicao } from '../actions/moverElementos.actions.ts'; // Ação de atualizar a posição
+import React, { useEffect, useState } from 'react';
+import { atualizarPosicao } from '../actions/moverElementos.actions.ts';
 import './OrganizacaoPage.css';
 
 const OrganizacaoPage = () => {
-  const [motos, setMotos] = useState([
-    { id: 1, nome: 'Moto', x: 0, y: 0 }
-  ]);
-
+  const [motos, setMotos] = useState([]);
+  const [motosDisponiveis, setMotosDisponiveis] = useState([]);
+  const [selectedMotoId, setSelectedMotoId] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [draggedMoto, setDraggedMoto] = useState(null);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  // 1. Buscar as motos cadastradas no banco de dados
+  useEffect(() => {
+    async function fetchMotos() {
+      try {
+        const response = await fetch('http://localhost:8080/motos');
+        const data = await response.json();
+        setMotosDisponiveis(data);
+      } catch (error) {
+        console.error('Erro ao buscar motos do banco:', error);
+      }
+    }
+
+    fetchMotos();
+  }, []);
+
+  // 2. Adicionar moto ao grid quando o ID for selecionado
+  useEffect(() => {
+    if (selectedMotoId && !motos.find(m => m.id === selectedMotoId)) {
+      const motoSelecionada = motosDisponiveis.find(m => m.id === selectedMotoId);
+      if (motoSelecionada) {
+        // Posiciona no canto superior esquerdo por padrão (0, 0)
+        setMotos(prev => [...prev, { ...motoSelecionada, x: 0, y: 0 }]);
+      }
+    }
+  }, [selectedMotoId]);
 
   const handleMouseDown = (e, moto) => {
     setIsDragging(true);
@@ -27,12 +52,10 @@ const OrganizacaoPage = () => {
       const newX = e.clientX - offset.x;
       const newY = e.clientY - offset.y;
 
-      // Calculando a posição para garantir que a moto não saia da grid
-      const gridSize = 50; // tamanho de cada celual na grid
+      const gridSize = 50;
       const newXGrid = Math.floor(newX / gridSize);
       const newYGrid = Math.floor(newY / gridSize);
 
-      // Garantir que a moto nao saia da grid de 10x10
       const clampedX = Math.min(Math.max(newXGrid, 0), 9);
       const clampedY = Math.min(Math.max(newYGrid, 0), 9);
 
@@ -54,10 +77,9 @@ const OrganizacaoPage = () => {
 
       if (finalMoto) {
         try {
-          // Passando as posições inicial e final para a função de atualizao
           await atualizarPosicao({
-            inicialX: draggedMoto.x,
-            inicialY: draggedMoto.y,
+            inicialX: draggedMoto.x ?? 0,
+            inicialY: draggedMoto.y ?? 0,
             finalX: finalMoto.x,
             finalY: finalMoto.y,
           });
@@ -79,14 +101,24 @@ const OrganizacaoPage = () => {
     >
       <h1 className="title">Organizar Pátio</h1>
 
-      <button
-        onClick={() => console.log('Organização salva')}
-        className="button"
-      >
-        Salvar organização
-      </button>
+      {/* Dropdown de seleção de moto do banco */}
+      <label>
+        Selecione uma moto:
+        <select
+          value={selectedMotoId || ''}
+          onChange={(e) => setSelectedMotoId(Number(e.target.value))}
+        >
+          <option value="">-- Selecione --</option>
+          {Array.isArray(motosDisponiveis) &&
+            motosDisponiveis.map((moto) => (
+              <option key={moto.id} value={moto.id}>
+                {moto.nome} (ID {moto.id})
+              </option>
+            ))}
 
-      {/* Mapa */}
+        </select>
+      </label>
+
       <div className="map-container">
         {[...Array(100)].map((_, index) => {
           const x = index % 10;
@@ -102,15 +134,15 @@ const OrganizacaoPage = () => {
           );
         })}
 
-        {/* Motos */}
+        {/* Mostrar as motos posicionadas */}
         {motos.map((moto) => (
           <div
             key={moto.id}
             onMouseDown={(e) => handleMouseDown(e, moto)}
             className="moto"
             style={{
-              left: `${moto.x * 50}px`, // Ajusta a posição com base na grid
-              top: `${moto.y * 50}px`,  // Ajusta a posição com base na grid
+              left: `${moto.x * 50}px`,
+              top: `${moto.y * 50}px`,
             }}
           >
             {moto.nome}
