@@ -6,7 +6,12 @@
 - Na tela de Historico de verificação, adicionei em cada card as infomações do fiscal que fez essa verificação e tabem a foto do mapa
 
   
+## Grupo:
+- Christian Milfont rm555345
+- Anderson Pedro rm557002
+- Iago Victor rm558450
 
+  
 ## Tecnologias
 ### Backend:
 - Java com Spring Boot
