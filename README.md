@@ -2,7 +2,12 @@
 
 O **Mottu Pátio App** é uma aplicação mobile (APK) destinada a organizar o pátio de motos, facilitando as rotinas de verificação dos fiscais de campo/pátio, auxiliando no cadastro e histórico de motos. Através desse app, fiscais de campo podem realizar rotinas de verificação e atualização de dados das motos no pátio. O aplicativo também permite que os usuários gerenciem suas preferências.
 
+## Grupo:
+- Christian Milfont rm555345
+- Anderson Pedro rm557002
+- Iago Victor rm558450
 
+  
 ## Estrutura inicial do app criada com:
 
 - Navegação entre 5 telas com React Navigation
