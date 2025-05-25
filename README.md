@@ -4,9 +4,9 @@
 Este é um projeto desenvolvido como parte de um desafio técnico. A aplicação foi construída utilizando **.NET 6** e segue boas práticas de estrutura e organização para aplicações web.
 
 ## Grupo:
-- Christian Milfont
-- Anderson Pedro
-- Iago Victor
+- Christian Milfont rm555345
+- Anderson Pedro rm557002
+- Iago Victor rm558450
 
 ##  Tecnologias Utilizadas
 
