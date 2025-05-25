@@ -40,7 +40,12 @@ Organização modular para facilitar expansão
 
 
 ## Como Rodar Localmente
-
+LEMBRANDO - EM APPJSON: AJUSTAR A CONEXÃO
+``` 
+ "ConnectionStrings": {
+    "Oracle": "User Id=xxx;Password=xxx;Data Source=oracle.fiap.com.br:1521/orcl"
+  }
+```
 1. Clone o repositório:
 
 ```bash
