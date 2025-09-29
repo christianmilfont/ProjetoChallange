@@ -6,42 +6,100 @@ O **Mottu Pátio App** é uma aplicação mobile (APK) destinada a organizar o p
 - Christian Milfont rm555345
 - Anderson Pedro rm557002
 - Iago Victor rm558450
-
   
-## Estrutura inicial do app criada com:
-
-- Navegação entre 5 telas com React Navigation
-
-- Protótipos funcionais com dados mockados
-
-- Formulário com useState
-
-- Salvamento e leitura com AsyncStorage
-
-### O que foi adicionado:
-- Estilização com Tailwind via nativewind
-
-- Botões com ícones
-
-- Validações básicas no formulário
-
-
-## Telas
-
-1. **Home**: Tela inicial com botões para navegar para as outras funcionalidades do app.
-2. **Verificação**: Tela para verificar as motos presentes no pátio.
-3. **Cadastro de Moto**: Formulário para cadastrar novas motos, com campos para placa e modelo.
-4. **Histórico**: Tela que exibe o histórico de verificações realizadas.
-5. **Preferências**: Tela para gerenciar as preferências do usuário, como o nome do fiscal, armazenado no `AsyncStorage`.
+---
 
 ## Tecnologias Utilizadas
 
-- **React Native**: Framework para desenvolvimento de apps móveis.
-- **Expo**: Ferramenta para facilitar o desenvolvimento com React Native.
-- **React Navigation**: Biblioteca para navegação entre telas.
-- **AsyncStorage**: Para persistir dados no dispositivo local.
-- **React Native Gesture Handler e Reanimated**: Para gestos e animações.
+### Frontend
+- **React Native (Expo)** – plataforma mobile cross-platform.
+- **Axios** – para requisições HTTP à API.
+- **React Navigation** – para navegação entre telas.
+- **FlatList** – para exibição da lista de motos.
+- **AsyncStorage (opcional)** – para armazenamento local, se necessário.
 
+### Backend
+- **Java 17 / Spring Boot**
+- **Spring Data JPA** – persistência de dados.
+- **Spring Security** – controle de acesso (ADMIN / USER).
+- **Hibernate Validator** – validação de DTOs.
+- **Thymeleaf** – templates web para administração via navegador.
+- **H2 / MySQL / outro banco** – armazenamento das motos.
+
+---
+
+## Estrutura do Backend
+
+- **`MotoController`**  
+  Controlador Thymeleaf para administração web.  
+  Permite:
+  - Listagem de motos (`/motos/listagem`)
+  - Criação e edição via formulário (`/motos/new`, `/motos/edit/{id}`)
+  - Exclusão (`/motos/delete/{id}`)
+
+- **`MotoRestController`**  
+  Controlador REST para consumo pelo app mobile.  
+  Endpoints:
+  - `GET /api/motos` – lista todas as motos
+  - `GET /api/motos/{id}` – busca moto específica
+  - `POST /api/motos` – cria nova moto (JSON)
+  - `PUT /api/motos/{id}` – atualiza moto existente (JSON)
+  - `DELETE /api/motos/{id}` – remove moto
+
+---
+
+## Estrutura do Frontend
+
+- **`Api.js`** – centraliza as chamadas à API REST:
+  ```javascript
+  import axios from "axios";
+
+  const API_BASE = "http://localhost:8080/api/motos"; // ajuste IP conforme emulador/dispositivo
+
+  export async function getMotos() { ... }
+  export async function saveMoto(moto) { ... }
+  export async function updateMoto(id, moto) { ... }
+  export async function deleteMoto(id) { ... }
+  ```
+## MotoListScreen.js – tela de listagem:
+
+Exibe todas as motos em um FlatList
+
+Cada card possui botões de Editar e Excluir
+
+Exclusão com Alert de confirmação
+
+### Navegação para tela de edição (MotoEditScreen)
+
+- MotoEditScreen.js – tela de atualização de motos:
+
+Formulário pré-preenchido com dados da moto
+
+Atualiza via PUT /api/motos/{id}
+
+Retorna para a lista após atualização
+
+### Tela de criação:
+
+Reaproveita formulário semelhante à edição
+
+Cria moto via POST /api/motos
+
+## Fluxo do App
+
+- O usuário abre o MotoListScreen.
+
+- O app busca todas as motos via getMotos() e exibe os cards.
+
+### Cada card possui:
+
+- Editar → navega para tela de edição.
+
+- Excluir → alerta de confirmação e deleta a moto via API.
+
+- Tela de criação (CreateMotoScreen) envia novo registro via saveMoto().
+
+Todas as alterações são refletidas imediatamente na lista.
 
 
 ### Configurando projeto
