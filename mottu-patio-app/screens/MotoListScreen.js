@@ -16,30 +16,37 @@ export default function MotoListScreen({ navigation }) {
     setLoading(false);
   };
 
-  const handleDelete = (id) => {
+ const handleDelete = (id) => {
   Alert.alert(
-  "Confirmação",
-  "Deseja realmente excluir esta moto?",
-  [
-    { text: "Cancelar", style: "cancel" },
-    { 
-      text: "Excluir", 
-      style: "destructive", 
-      onPress: async () => {
-        try {
-          console.log("Chamando deleteMoto com id:", id);
-          await deleteMoto(id);
-          await fetchMotos();
-          console.log("Excluída com sucesso!");
-        } catch (error) {
-          console.error("Erro ao excluir:", error);
-          Alert.alert("Erro", "Não foi possível excluir a moto.");
-        }
-      } 
-    }
-  ]
-);
-}
+    "Confirmação",
+    "Deseja realmente excluir esta moto?",
+    [
+      { text: "Cancelar", style: "cancel" },
+      { 
+        text: "Excluir", 
+        style: "destructive", 
+        onPress: async () => {
+          try {
+            console.log("Chamando deleteMoto com id:", id);
+            await deleteMoto(id);
+
+            // opção 1: atualiza localmente
+            // setMotos(motos.filter(m => String(m.id) !== String(id)));
+
+            // opção 2: recarrega da API (mais seguro)
+            await fetchMotos();
+
+            console.log("Excluída com sucesso!");
+          } catch (error) {
+            console.error("Erro ao excluir:", error);
+            Alert.alert("Erro", "Não foi possível excluir a moto.");
+          }
+        } 
+      }
+    ]
+  );
+};
+
 
   if (loading) {
     return (

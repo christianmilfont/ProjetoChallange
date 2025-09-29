@@ -48,4 +48,4 @@ export async function deleteMoto(id) {
     console.error("Erro ao excluir moto:", error);
     throw error;
   }
-}
+};
