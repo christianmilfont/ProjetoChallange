@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet, Alert, Button } from "react-native";
-import { getMotos, deleteMoto } from "../Api";
+import { getMotos, deleteMoto } from "../api/Api";
 
 export default function MotoListScreen({ navigation }) {
   const [motos, setMotos] = useState([]);
@@ -17,27 +17,29 @@ export default function MotoListScreen({ navigation }) {
   };
 
   const handleDelete = (id) => {
-    Alert.alert(
-      "Confirmação",
-      "Deseja realmente excluir esta moto?",
-      [
-        { text: "Cancelar", style: "cancel" },
-        { 
-          text: "Excluir", 
-          style: "destructive", 
-          onPress: async () => {
-            try {
-              await deleteMoto(id);
-              setMotos(motos.filter(m => m.id !== id));
-            } catch (error) {
-              console.error(error);
-              Alert.alert("Erro", "Não foi possível excluir a moto.");
-            }
-          } 
+  Alert.alert(
+  "Confirmação",
+  "Deseja realmente excluir esta moto?",
+  [
+    { text: "Cancelar", style: "cancel" },
+    { 
+      text: "Excluir", 
+      style: "destructive", 
+      onPress: async () => {
+        try {
+          console.log("Chamando deleteMoto com id:", id);
+          await deleteMoto(id);
+          await fetchMotos();
+          console.log("Excluída com sucesso!");
+        } catch (error) {
+          console.error("Erro ao excluir:", error);
+          Alert.alert("Erro", "Não foi possível excluir a moto.");
         }
-      ]
-    );
-  };
+      } 
+    }
+  ]
+);
+}
 
   if (loading) {
     return (
@@ -72,7 +74,7 @@ export default function MotoListScreen({ navigation }) {
           <View style={{ flexDirection: "row", marginTop: 8, justifyContent: "space-between" }}>
             <Button 
               title="Editar" 
-              onPress={() => navigation.navigate("MotoEditScreen", { moto: item })} 
+              onPress={() => navigation.navigate("Motos Edition", { moto: item })} 
             />
             <Button 
               title="Excluir" 

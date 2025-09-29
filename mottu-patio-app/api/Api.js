@@ -39,11 +39,13 @@ export async function updateMoto(id, moto) {
 };
 
 // Deletar moto
+
 export async function deleteMoto(id) {
   try {
-    await axios.delete(`${API_BASE}/${id}`);
+    const response = await axios.delete(`${API_BASE}/${id}`);
+    return response.data;
   } catch (error) {
-    console.error("Erro ao deletar moto:", error);
+    console.error("Erro ao excluir moto:", error);
     throw error;
   }
-};
+}

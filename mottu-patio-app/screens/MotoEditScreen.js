@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
-import { saveMoto, getMotos } from "../Api";
+import { saveMoto, getMotos } from "../api/Api";
 import axios from "axios";
 
 const API_BASE = "http://localhost:8080/api/motos";
@@ -42,7 +42,6 @@ export default function MotoEditScreen({ route, navigation }) {
         keyboardType="numeric"
         onChangeText={(text) => setForm({ ...form, ano: parseInt(text) })}
       />
-      {/* Adicione os outros campos: cor, cilindrada, status, posicao, latitude, longitude */}
       <Button title="Atualizar Moto" onPress={handleUpdate} />
     </View>
   );

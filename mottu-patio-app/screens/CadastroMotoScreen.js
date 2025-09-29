@@ -1,7 +1,7 @@
 // CreateMotoScreen.js
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert, ScrollView } from "react-native";
-import { saveMoto } from "../Api";
+import { saveMoto } from "../api/Api";
 import { Picker } from "@react-native-picker/picker";
 
 export default function CadastroMotoScreen({ navigation }) {

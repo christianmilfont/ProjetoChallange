@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useColorScheme } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-
+import { customDarkTheme } from './utils/theme';
 import HomeScreen from "./screens/HomeScreen";
 import VerificacaoScreen from "./screens/VerificacaoScreen";
 import CadastroMotoScreen from "./screens/CadastroMotoScreen";
@@ -24,7 +24,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Motos Listagem" component={MotoListScreen} />
-          <Stack.Screen name="Motos Edição" component={MotoEditScreen} />
+          <Stack.Screen name="Motos Edition" component={MotoEditScreen} />
           <Stack.Screen name="Verificacao" component={VerificacaoScreen} />
           <Stack.Screen name="Cadastro Moto" component={CadastroMotoScreen} />
           <Stack.Screen name="Historico" component={HistoricoScreen} />
