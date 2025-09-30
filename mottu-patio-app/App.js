@@ -49,14 +49,9 @@ export default function App() {
           <Stack.Screen
             name="HomeScreen"
             options={{ headerShown: false }}
-            children={(props) => (
-              <HomeScreen
-                {...props}
-                isDarkTheme={isDarkTheme}
-                setIsDarkTheme={setIsDarkTheme}
-              />
-            )}
+            component={HomeScreen}
           />
+
 
           {/* Outras telas */}
           <Stack.Screen name="MotoList" component={MotoListScreen} />

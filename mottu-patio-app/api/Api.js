@@ -63,11 +63,18 @@ export async function deleteMoto(id) {
     throw error;
   }
 };
-export const login = async (email, senha) => {
+// Login
+export const login = async (email, nome, endereco, telefone) => {
   try {
-    const response = await axios.post(`https://localhost:7111//api/login`, { email, senha });
+    const response = await axios.post("http://localhost:5093/api/Login", { 
+      email, 
+      nome,
+      endereco,
+      telefone
+    });
     return response.data;
   } catch (error) {
+    console.error("Erro ao tentar fazer login:", error.response ? error.response.data : error.message);
     throw new Error('Erro ao tentar fazer login');
   }
 };
