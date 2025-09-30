@@ -3,8 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { useTheme, Button, Card, Text, Switch } from "react-native-paper";
 
 export default function HomeScreen({ navigation, isDarkTheme, setIsDarkTheme }) {
-  const theme = useTheme(); // Pega o tema atual
-  const { colors } = theme; // Obtém as cores do tema
+  const theme = useTheme();
+  const { colors } = theme;
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation, isDarkTheme, setIsDarkTheme }) 
       {/* Botões de navegação */}
       <Button
         mode="contained"
-        style={[styles.button, { backgroundColor: colors.primary }]} // Altera a cor do botão
+        style={[styles.button, { backgroundColor: colors.primary }]}
         onPress={() => navigation.navigate("MotoList")}
       >
         Listagem de Motos
@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation, isDarkTheme, setIsDarkTheme }) 
       </Button>
       <Button
         mode="outlined"
-        style={[styles.button, { borderColor: colors.primary }]} // Cor do botão outlined
+        style={[styles.button, { borderColor: colors.primary }]}
         onPress={() => navigation.navigate("Preferencias")}
       >
         Preferências
@@ -69,28 +69,3 @@ export default function HomeScreen({ navigation, isDarkTheme, setIsDarkTheme }) 
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    padding: 20,
-    gap: 15,
-  },
-  card: {
-    marginBottom: 20,
-    padding: 10,
-    borderRadius: 12,
-    elevation: 3,
-  },
-  button: {
-    borderRadius: 10,
-    paddingVertical: 5,
-  },
-  switchContainer: {
-    marginTop: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
