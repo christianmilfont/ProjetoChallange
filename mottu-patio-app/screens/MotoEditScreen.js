@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 import { saveMoto, getMotos } from "../api/Api";
 import axios from "axios";
 
-const API_BASE = "http://localhost:8080/api/motos";
+const API_BASE = "http://10.0.2.2:8080/api/motos";
 
 export default function MotoEditScreen({ route, navigation }) {
   const { moto } = route.params; // moto selecionada

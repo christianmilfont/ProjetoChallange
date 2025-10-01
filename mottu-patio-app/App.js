@@ -13,6 +13,7 @@ import VerificacaoScreen from "./screens/VerificacaoScreen";
 import CadastroMotoScreen from "./screens/CadastroMotoScreen";
 import HistoricoScreen from "./screens/HistoricoScreen";
 import PreferenciasScreen from "./screens/PreferenciasScreen";
+import MotoEditScreen from "./screens/MotoEditScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,8 @@ export default function App() {
           <Stack.Screen name="CadastroMoto" component={CadastroMotoScreen} />
           <Stack.Screen name="Historico" component={HistoricoScreen} />
           <Stack.Screen name="Preferencias" component={PreferenciasScreen} />
+          <Stack.Screen name="MotoEditScreen" component={MotoEditScreen} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

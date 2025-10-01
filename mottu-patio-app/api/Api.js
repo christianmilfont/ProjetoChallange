@@ -3,7 +3,7 @@ import axios from "axios";
 
 // se for emulador Android use "http://10.0.2.2:8080"
 // se for dispositivo físico use o IP da máquina na rede local, ex: "http://192.168.0.10:8080"
-const API_BASE = "http://localhost:8080/api/motos";
+const API_BASE = "http://10.0.2.2:8080/api/motos";
 
 // Listar motos
 export async function getMotos() {
@@ -66,7 +66,7 @@ export async function deleteMoto(id) {
 // Login
 export const login = async (email, nome, endereco, telefone) => {
   try {
-    const response = await axios.post("http://localhost:5093/api/Login", { 
+    const response = await axios.post("http://10.0.2.2:5093/api/Login", { 
       email, 
       nome,
       endereco,

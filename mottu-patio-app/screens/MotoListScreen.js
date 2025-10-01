@@ -93,7 +93,7 @@ export default function MotoListScreen({ navigation }) {
             >
               <Button
                 title="Editar"
-                onPress={() => navigation.navigate("MotoEdit", { moto: item })}
+                onPress={() => navigation.navigate("MotoEditScreen", { moto: item })}
               />
               <Button
                 title="Excluir"
