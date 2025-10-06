@@ -33,6 +33,12 @@ O **Mottu Pátio App** é uma aplicação mobile (APK) destinada a organizar o p
 
 - O app busca todas as motos via getMotos() e exibe os cards.
 
+# Para rodar:
+É necessario clonar os repositorios 
+https://github.com/christianmilfont/DOTNET-MOTTU.git
+https://github.com/christianmilfont/Java-Mottu.git
+
+Cada repo tem como rodar cada BackEnd!
 ### Cada card possui:
 
 - Editar → navega para tela de edição.
