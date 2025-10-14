@@ -1,8 +1,18 @@
 {
-    "logout":"Sair da conta",
-    "cancel":"Cancelar",
-    "delete":"Excluir",
-    "edit": "Editar",
-    "login":"Realizar login(entrar)",
-    "password":"Senha"
+  "loginTitle": "Login",
+  "errorFillAllFields": "Por favor, preencha todos os campos.",
+  "errorInvalidLogin": "Credenciais inválidas ou erro no login. Tente novamente.",
+  "placeholderEmail": "Email",
+  "placeholderName": "Nome",
+  "placeholderAddress": "Endereço",
+  "placeholderPhone": "Telefone",
+  "buttonLogin": "Entrar",
+  "themeLabel": "Tema {{theme}}",
+  "homeTitle": "Gestão de Motos",
+  "homeListMotos": "Listagem de Motos",
+  "homeCheckMotos": "Verificar Motos",
+  "homeRegisterMoto": "Cadastrar Moto",
+  "homeHistory": "Histórico",
+  "homePreferences": "Preferências",
+  "logout": "Logout"
 }
