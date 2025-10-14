@@ -1,12 +1,12 @@
 {
   "loginTitle": "Login",
-  "errorFillAllFields": "Por favor, preencha todos os campos.",
-  "errorInvalidLogin": "Credenciais inválidas ou erro no login. Tente novamente.",
   "placeholderEmail": "Email",
   "placeholderName": "Nome",
   "placeholderAddress": "Endereço",
   "placeholderPhone": "Telefone",
   "buttonLogin": "Entrar",
+  "errorFillAllFields": "Por favor, preencha todos os campos.",
+  "errorInvalidLogin": "Credenciais inválidas ou erro no login. Tente novamente.",
   "themeLabel": "Tema {{theme}}",
   "homeTitle": "Gestão de Motos",
   "homeListMotos": "Listagem de Motos",
@@ -14,5 +14,5 @@
   "homeRegisterMoto": "Cadastrar Moto",
   "homeHistory": "Histórico",
   "homePreferences": "Preferências",
-  "logout": "Logout"
+  "logout": "Sair"
 }

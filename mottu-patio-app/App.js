@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Provider as PaperProvider } from "react-native-paper";
 import { customLightTheme, customDarkTheme } from "./utils/theme";
-
+import './services/i18n'; // importa a configuração do i18n (isso inicializa o i18next)
 // Importando as telas
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";

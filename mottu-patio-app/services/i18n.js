@@ -1,22 +1,57 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Localization from 'expo-localization';
-import i18n from 'i18n-js';
 
-// Importa os arquivos de tradução
-import pt from '../locales/PT.json';
-import es from '../locales/ES.json';
+import pt from '../locales/pt.json';
+import es from '../locales/es.json';
 
-// Define os idiomas disponíveis
-i18n.translations = {
-  pt,
-  es,
+const LANG_STORAGE_KEY = 'appLanguage';
+
+const resources = {
+  pt: { translation: pt },
+  es: { translation: es },
 };
 
-// Define o idioma padrão (fallback)
-i18n.fallbacks = true;
+const getStoredLanguage = async () => {
+  try {
+    const lang = await AsyncStorage.getItem(LANG_STORAGE_KEY);
+    if (lang) return lang;
+  } catch {}
+  return null;
+};
 
-// Define o idioma atual com base no sistema do usuário
-i18n.locale = Localization.locale.startsWith('es')
-  ? 'es'
-  : 'pt'; // Se não for espanhol, usa português como padrão
+const languageDetector = {
+  type: 'languageDetector',
+  async: true,
+  detect: async (callback) => {
+    const storedLang = await getStoredLanguage();
+    if (storedLang) {
+      callback(storedLang);
+    } else {
+      // usa idioma do sistema
+      const locale = Localization.locale.startsWith('es') ? 'es' : 'pt';
+      callback(locale);
+    }
+  },
+  init: () => {},
+  cacheUserLanguage: (lang) => {
+    AsyncStorage.setItem(LANG_STORAGE_KEY, lang);
+  },
+};
+
+i18n
+  .use(languageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: 'pt',
+    interpolation: {
+      escapeValue: false, // react já faz escape
+    },
+    react: {
+      useSuspense: false,
+    },
+  });
 
 export default i18n;
