@@ -39,7 +39,7 @@ O **Mottu Pátio App** é uma aplicação mobile (APK) destinada a organizar o p
 Criado um componente reutilizável AnimatedThemeButton, localizado em:
 
 ```
-    src/components/AnimatedThemeButton.js
+    src/utils/AnimatedThemeButton.js
 ```
 
 ### O botão utiliza Moti para:
