@@ -3,8 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Localization from 'expo-localization';
 
-import pt from '../locales/pt.json';
-import es from '../locales/es.json';
+import pt from '../locales/PT.json';
+import es from '../locales/ES.json';
 
 const LANG_STORAGE_KEY = 'appLanguage';
 

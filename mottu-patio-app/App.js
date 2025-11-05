@@ -1,10 +1,14 @@
+// App.js
 import React, { useState } from "react";
+import { PaperProvider } from "react-native-paper";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Provider as PaperProvider } from "react-native-paper";
+import { MotiView } from "moti";
+
 import { customLightTheme, customDarkTheme } from "./utils/theme";
-import './services/i18n'; // importa a configuração do i18n (isso inicializa o i18next)
-// Importando as telas
+import './services/i18n'; // inicializa i18next
+
+// Importando telas
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import CadastroScreen from "./screens/CadastroScreen";
@@ -16,6 +20,19 @@ import PreferenciasScreen from "./screens/PreferenciasScreen";
 import MotoEditScreen from "./screens/MotoEditScreen";
 
 const Stack = createNativeStackNavigator();
+
+// Wrapper para aplicar Moti em todas as telas
+const AnimatedScreen = ({ children }) => (
+  <MotiView
+    from={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ type: "timing", duration: 400 }}
+    style={{ flex: 1 }}
+  >
+    {children}
+  </MotiView>
+);
 
 export default function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -30,38 +47,64 @@ export default function App() {
             headerStyle: { backgroundColor: theme.colors.primary },
             headerTintColor: "#fff",
             headerTitleStyle: { fontWeight: "bold" },
+            animation: "slide_from_right", // animação padrão
           }}
         >
           {/* Tela de Login */}
-          <Stack.Screen name="Login">
+          <Stack.Screen name="Login" options={{ animation: "fade" }}>
             {(props) => (
-              <LoginScreen
-                {...props}
-                isDarkTheme={isDarkTheme}
-                setIsDarkTheme={setIsDarkTheme}
-              />
+              <AnimatedScreen>
+                <LoginScreen
+                  {...props}
+                  isDarkTheme={isDarkTheme}
+                  setIsDarkTheme={setIsDarkTheme}
+                />
+              </AnimatedScreen>
             )}
           </Stack.Screen>
 
           {/* Tela de Cadastro */}
-          <Stack.Screen name="Cadastro" component={CadastroScreen} />
+          <Stack.Screen name="Cadastro" options={{ animation: "slide_from_bottom" }}>
+            {(props) => (
+              <AnimatedScreen>
+                <CadastroScreen {...props} />
+              </AnimatedScreen>
+            )}
+          </Stack.Screen>
 
-          {/* Tela Home com ocultação de header */}
-          <Stack.Screen
-            name="HomeScreen"
-            options={{ headerShown: false }}
-            component={HomeScreen}
-          />
-
+          {/* Tela Home */}
+          <Stack.Screen name="HomeScreen" options={{ headerShown: false, animation: "fade" }}>
+            {(props) => (
+              <AnimatedScreen>
+                <HomeScreen {...props} />
+              </AnimatedScreen>
+            )}
+          </Stack.Screen>
 
           {/* Outras telas */}
-          <Stack.Screen name="MotoList" component={MotoListScreen} />
-          <Stack.Screen name="Verificacao" component={VerificacaoScreen} />
-          <Stack.Screen name="CadastroMoto" component={CadastroMotoScreen} />
-          <Stack.Screen name="Historico" component={HistoricoScreen} />
-          <Stack.Screen name="Preferencias" component={PreferenciasScreen} />
-          <Stack.Screen name="MotoEditScreen" component={MotoEditScreen} />
+          <Stack.Screen name="MotoList" options={{ animation: "slide_from_right" }}>
+            {(props) => <AnimatedScreen><MotoListScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
 
+          <Stack.Screen name="Verificacao" options={{ animation: "slide_from_bottom" }}>
+            {(props) => <AnimatedScreen><VerificacaoScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
+
+          <Stack.Screen name="CadastroMoto" options={{ animation: "slide_from_bottom" }}>
+            {(props) => <AnimatedScreen><CadastroMotoScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
+
+          <Stack.Screen name="Historico" options={{ animation: "slide_from_right" }}>
+            {(props) => <AnimatedScreen><HistoricoScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
+
+          <Stack.Screen name="Preferencias" options={{ animation: "fade" }}>
+            {(props) => <AnimatedScreen><PreferenciasScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
+
+          <Stack.Screen name="MotoEditScreen" options={{ animation: "slide_from_right" }}>
+            {(props) => <AnimatedScreen><MotoEditScreen {...props} /></AnimatedScreen>}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

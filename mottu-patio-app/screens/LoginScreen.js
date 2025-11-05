@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { TextInput, Text, View, StyleSheet } from 'react-native';
-import { Button, Switch, useTheme } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 import { login } from '../api/Api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
-import i18n from '../services/i18n'; 
+import i18n from '../services/i18n';
+import AnimatedThemeButton from '../utils/AnimatedThemeButton'; 
+//  import do novo botão
 
 const LoginPage = ({ navigation, isDarkTheme, setIsDarkTheme }) => {
   const { t } = useTranslation();
@@ -34,8 +36,8 @@ const LoginPage = ({ navigation, isDarkTheme, setIsDarkTheme }) => {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
-    AsyncStorage.setItem('appLanguage', lang); // Salva a escolha no AsyncStorage
-    setCurrentLang(lang); // Atualiza o estado do idioma atual
+    AsyncStorage.setItem('appLanguage', lang);
+    setCurrentLang(lang);
   };
 
   return (
@@ -43,6 +45,7 @@ const LoginPage = ({ navigation, isDarkTheme, setIsDarkTheme }) => {
       <Text style={[styles.title, { color: colors.primary }]}>{t('loginTitle')}</Text>
       {error ? <Text style={styles.error}>{error}</Text> : null}
 
+      {/* Campos */}
       <TextInput
         style={[styles.input, { borderColor: colors.primary, backgroundColor: colors.surface }]}
         placeholder={t('placeholderEmail')}
@@ -80,10 +83,15 @@ const LoginPage = ({ navigation, isDarkTheme, setIsDarkTheme }) => {
         <Text style={{ color: colors.primary, marginRight: 10 }}>
           {t('themeLabel', { theme: isDarkTheme ? 'Escuro' : 'Claro' })}
         </Text>
-        <Switch value={isDarkTheme} onValueChange={() => setIsDarkTheme(!isDarkTheme)} />
+
+        {/*  Nosso novo botão animado */}
+        <AnimatedThemeButton
+          isDarkTheme={isDarkTheme}
+          toggleTheme={() => setIsDarkTheme(!isDarkTheme)}
+        />
       </View>
 
-      {/* Botões de troca de idioma */}
+      {/* Idiomas */}
       <Button
         mode={currentLang === 'pt' ? 'contained' : 'outlined'}
         style={styles.languageButton}

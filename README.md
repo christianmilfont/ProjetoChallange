@@ -10,20 +10,81 @@ O **Mottu Pátio App** é uma aplicação mobile (APK) destinada a organizar o p
 
 ## Tecnologias Utilizadas
 
-### Frontend
-- **React Native (Expo)** – plataforma mobile cross-platform.
-- **Axios** – para requisições HTTP à API.
-- **React Navigation** – para navegação entre telas.
-- **FlatList** – para exibição da lista de motos.
-- **AsyncStorage (opcional)** – para armazenamento local, se necessário.
+####  Tecnologias Utilizadas
+
+- React Native (Expo)
+
+- React Native Paper
+
+- Moti (animações)
+
+- React Native Reanimated
+
+- i18next (traduções)
+
+- AsyncStorage (persistência local)
 
 ### Backend
-- **Java 17 / Spring Boot**
+- **Java 17 / Spring Boot** e **.NET ASPNETCORE 8:0**
 - **Spring Data JPA** – persistência de dados.
 - **Spring Security** – controle de acesso (ADMIN / USER).
 - **Hibernate Validator** – validação de DTOs.
 - **Thymeleaf** – templates web para administração via navegador.
-- ** MySQL – armazenamento das motos.
+- ** MySQL – armazenamento das motos, login e etc.
+-
+---
+## O que foi adicionado nesta versão
+ 1. Botão Animado de Troca de Tema (Claro/Escuro)
+
+Criado um componente reutilizável AnimatedThemeButton, localizado em:
+
+```
+    src/components/AnimatedThemeButton.js
+```
+
+### O botão utiliza Moti para:
+
+- Fazer rotação e “pulso” (escala animada);
+
+- Alternar suavemente entre ☀️ (tema claro) e 🌙 (tema escuro);
+
+- Alterar gradualmente a cor de fundo;
+
+- Exibir partículas animadas simulando estrelas no modo escuro.
+
+2. Transição Suave de Tema na Tela
+
+A tela de Login (LoginPage.js) agora possui uma transição suave de cor de fundo ao alternar entre os temas, proporcionando uma experiência mais fluida.
+
+- O efeito é feito com MotiView e animação de backgroundColor.
+
+3. Código Modular e Limpo
+
+A lógica de animação e renderização visual foi isolada em um componente externo (AnimatedThemeButton) para manter o LoginPage mais limpo e fácil de manter.
+
+- O botão pode ser reutilizado em qualquer tela com apenas uma linha:
+
+```
+    <AnimatedThemeButton
+    isDarkTheme={isDarkTheme}
+    toggleTheme={() => setIsDarkTheme(!isDarkTheme)}
+    />
+```
+
+---
+## Transições entre telas
+
+Configuradas no Native Stack Navigator
+
+Exemplos de animações:
+
+- fade → transição suave
+
+- slide_from_bottom → tela entra de baixo (iOS vertical)
+
+- slide_from_right → tela entra da direita (padrão)
+
+Cada tela envolta em MotiView para suavizar a entrada e saída
 
 ---
 
